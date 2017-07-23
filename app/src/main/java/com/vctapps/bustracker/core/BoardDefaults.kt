@@ -4,6 +4,8 @@ import android.os.Build
 
 object BoardDefaults {
 
+    val ID_MODULE_VALUE = 1
+
     private val DEVICE_EDISON = "edison"
     private val DEVICE_JOULE = "joule"
     private val DEVICE_RPI3 = "rpi3"
@@ -11,9 +13,6 @@ object BoardDefaults {
     private val DEVICE_IMX6UL_VVDN = "imx6ul_iopb"
     private val DEVICE_IMX7D_PICO = "imx7d_pico"
 
-    /**
-     * Return the UART for current board.
-     */
     val uartName: String
         get() {
             when (Build.DEVICE) {
