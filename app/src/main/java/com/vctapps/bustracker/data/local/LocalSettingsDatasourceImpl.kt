@@ -4,6 +4,7 @@ import android.content.Context
 import com.vctapps.bustracker.core.BoardDefaults
 import com.vctapps.bustracker.core.InvalidData
 import com.vctapps.bustracker.domain.entity.Settings
+import io.reactivex.Maybe
 
 class LocalSettingsDatasourceImpl(context: Context) : LocalSettingsDatasource {
 
@@ -23,7 +24,17 @@ class LocalSettingsDatasourceImpl(context: Context) : LocalSettingsDatasource {
         return sharedPreferences.getInt(ID_BUS, InvalidData.INT) != InvalidData.INT
     }
 
-    override fun getSettings(): Settings {
+    override fun getDeviceSettings(): Maybe<Settings> {
+        return Maybe.create { emmiter ->
+            if(!isDeviceSettings()) {
+                emmiter.onComplete()
+            }
+
+            emmiter.onSuccess(getSettings())
+        }
+    }
+
+    private fun getSettings(): Settings{
         val idBus = get(ID_BUS)
         val idModule = get(ID_MODULE)
 
