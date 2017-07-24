@@ -26,6 +26,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -36,6 +37,8 @@ android {
 }
 
 dependencies {
+
+    compile 'com.android.support:multidex:1.0.1'
 
     // Android
     compile "com.android.support:appcompat-v7:${ANDROID_SUPPORT_APPCOMPAT_VERSION}"
@@ -54,8 +57,7 @@ dependencies {
 
     // DAGGER
     compile "com.google.dagger:dagger:${DAGGER_VERSION}"
-    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
-    provided "javax.annotation:jsr250-api:${ANNOTATION_JSR250_VERSION}"
+    kapt "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
 
     // RETROFIT
     compile "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION}"
