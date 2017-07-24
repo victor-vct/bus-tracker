@@ -1,4 +1,6 @@
 package com.vctapps.bustracker.domain.entity
 
-data class Settings(var idBus: Int,
-                    var idModule: Int)
+import com.google.gson.annotations.SerializedName
+
+data class Settings(@SerializedName("id_bus") var idBus: Int,
+                    @SerializedName("id_module") var idModule: Int)

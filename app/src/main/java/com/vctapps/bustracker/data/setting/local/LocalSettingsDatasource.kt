@@ -1,4 +1,4 @@
-package com.vctapps.bustracker.data.local
+package com.vctapps.bustracker.data.setting.local
 
 import com.vctapps.bustracker.domain.entity.Settings
 import io.reactivex.Maybe

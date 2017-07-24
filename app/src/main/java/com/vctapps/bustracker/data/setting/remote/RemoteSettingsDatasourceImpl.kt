@@ -1,6 +1,7 @@
-package com.vctapps.bustracker.data.remote
+package com.vctapps.bustracker.data.setting.remote
 
 import com.vctapps.bustracker.core.BoardDefaults
+import com.vctapps.bustracker.core.data.ApiService
 import com.vctapps.bustracker.domain.entity.Settings
 import io.reactivex.Maybe
 
