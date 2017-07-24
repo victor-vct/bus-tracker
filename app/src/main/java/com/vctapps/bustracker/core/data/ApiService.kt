@@ -1,6 +1,6 @@
 package com.vctapps.bustracker.core.data
 
-import com.vctapps.bustracker.domain.entity.Location
+import com.vctapps.bustracker.domain.entity.BusLocation
 import com.vctapps.bustracker.domain.entity.Settings
 import io.reactivex.Completable
 import io.reactivex.Maybe
@@ -15,6 +15,6 @@ interface ApiService {
     fun getSettings(@Path("id_module") idMdule: Int): Maybe<Settings>
 
     @POST("bus/{id_bus}/position/")
-    fun sendLocation(@Path("id_bus") idBus: Int, @Body location: Location) : Completable
+    fun sendLocation(@Path("id_bus") idBus: Int, @Body busLocation: BusLocation) : Completable
 
 }
