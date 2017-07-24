@@ -1,12 +1,12 @@
 # Bus Tracker
-Module from my TCC for tracking a bus, utilizing Android Things
+Module from my TCC for tracking a bus, utilizing [Android Things](https://developer.android.com/things/index.html)
 
 ## Project
 
-In my final project graduate, we will development app for deficient visuals that needs take a bus. This repository contains the project for bus module that has functions:
+In my final project graduate, we will development app for visual impairment that needs take a bus. This repository contains the project for bus module that has functions:
 
 - Tracker the bus
-- Show notification to driver that needs stop in next stop bus
+- Show notification to driver who needs to stop at next stop bus
 
 ## Hardware
 
@@ -16,6 +16,12 @@ In my final project graduate, we will development app for deficient visuals that
 ## Software
 
 - [Android Things](https://developer.android.com/things/index.html)
+
+## Libraries
+
+- Retrofit
+- RxJava/RxAndroid
+- Dagger [needs implement]
 
 ## References
 
