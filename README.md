@@ -25,7 +25,7 @@ I tried use Clean Architecture a little simplified. I think use more robust Clea
 
 - Retrofit
 - RxJava/RxAndroid
-- Dagger [not implement yet]
+- Dagger
 
 ## References
 
