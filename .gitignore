@@ -15,6 +15,9 @@ out/
 
 # Gradle files
 .gradle/
+gradle.properties
+gradlew
+gradlew.bat
 build/
 
 # Local configuration file (sdk path, etc)
