@@ -14,7 +14,7 @@ This repository contains the bus module that compose this system.
 
 ## Architecture
 
-I used simplified Clean Architecture. Use more robust Clean Architecture, like in Android apps, in this project with Android Things, is a little over engineering. 
+It was used a simplified version of Clean Architecture - use of the full specification, like in a regular Android application, in this project with Android Things would be over engineering the problem.
 
 ### Hardware
 
