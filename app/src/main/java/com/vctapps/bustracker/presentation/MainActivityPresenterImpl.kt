@@ -1,9 +1,13 @@
 package com.vctapps.bustracker.presentation
 
-import com.vctapps.bustracker.domain.SendLocationUseCase
+import com.vctapps.bustracker.data.setting.SettingsRepository
+import com.vctapps.bustracker.domain.SettingsTracking
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 
-class MainActivityPresenterImpl(val sendLocationUseCase: SendLocationUseCase): MainActivityPresenter {
+class MainActivityPresenterImpl(val settingsTracking: SettingsTracking,
+                                val settingsRepository: SettingsRepository): MainActivityPresenter {
 
     lateinit var baseView: BaseView
 
@@ -12,11 +16,18 @@ class MainActivityPresenterImpl(val sendLocationUseCase: SendLocationUseCase): M
     override fun attachTo(baseView: BaseView) {
         this.baseView = baseView
 
-        disposable.add(sendLocationUseCase
-                .run()
-                .subscribe(
-                        {baseView.hideLoading()},
-                        {_ -> baseView.showMessageError()}))
+        baseView.showLoading()
+
+        settingsRepository.getDeviceSettings()
+                .subscribe({
+//                    disposable.add(settingsTracking
+//                            .run()
+//                            .subscribeOn(Schedulers.io())
+//                            .observeOn(AndroidSchedulers.mainThread())
+//                            .subscribe(
+//                                    {baseView.hideLoading()},
+//                                    {_ -> baseView.showMessageError()}))
+                },{error -> baseView.showMessageError()})
     }
 
     override fun dettachFromView() {

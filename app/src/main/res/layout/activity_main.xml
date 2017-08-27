@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.vctapps.bustracker.presentation.MainActivity">
+    android:background="@color/backgroundScreen"
+    android:gravity="center">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello Bus Tracker!"/>
+    <include layout="@layout/error_message"/>
 
-</LinearLayout>
+    <include layout="@layout/loading_message"/>
+
+    <include layout="@layout/waiting_message"/>
+
+    <include layout="@layout/needs_stop_message"/>
+
+</FrameLayout>
