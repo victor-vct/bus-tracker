@@ -17,6 +17,8 @@ class LocalSettingsDatasourceImpl(context: Context) : LocalSettingsDatasource {
     )
 
     init {
+        sharedPreferences.edit().clear().commit()
+
         save(ID_MODULE, BoardDefaults.ID_MODULE_VALUE)
     }
 
@@ -28,6 +30,7 @@ class LocalSettingsDatasourceImpl(context: Context) : LocalSettingsDatasource {
         return Maybe.create { emmiter ->
             if(!isDeviceSettings()) {
                 emmiter.onComplete()
+                return@create
             }
 
             emmiter.onSuccess(getSettings())
