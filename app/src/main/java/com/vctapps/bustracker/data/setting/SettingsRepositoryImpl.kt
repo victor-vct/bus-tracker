@@ -1,6 +1,5 @@
 package com.vctapps.bustracker.data.setting
 
-import com.vctapps.bustracker.data.setting.SettingsRepository
 import com.vctapps.bustracker.data.setting.local.LocalSettingsDatasource
 import com.vctapps.bustracker.data.setting.remote.RemoteSettingsDatasource
 import com.vctapps.bustracker.domain.entity.Settings
