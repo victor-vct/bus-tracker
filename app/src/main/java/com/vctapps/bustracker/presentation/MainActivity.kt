@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.vctapps.bustracker.R
@@ -29,6 +30,7 @@ class MainActivity : Activity(), BaseView {
     lateinit var loading_view: ViewGroup
     lateinit var waiting_view: ViewGroup
     lateinit var needs_stop: ViewGroup
+    lateinit var tryAgainButton: Button
 
     @Inject
     lateinit var presenter: MainActivityPresenter
@@ -48,11 +50,16 @@ class MainActivity : Activity(), BaseView {
         loading_view = loading_message
         waiting_view = waiting_message
         needs_stop = needs_stop_message
+        tryAgainButton = tryAgain
 
         error_view.visibility = View.GONE
         loading_view.visibility = View.GONE
         waiting_view.visibility = View.GONE
         needs_stop.visibility = View.GONE
+
+        tryAgainButton.setOnClickListener({
+            presenter.onClickedTryAgainButton()
+        })
     }
 
     override fun onResume() {
