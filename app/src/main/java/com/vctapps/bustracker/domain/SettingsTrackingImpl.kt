@@ -6,54 +6,51 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
-import com.google.android.things.contrib.driver.gps.NmeaGpsDriver
-import com.vctapps.bustracker.core.BoardDefaults
-import com.vctapps.bustracker.core.GpsDefaults
 import com.vctapps.bustracker.data.location.LocationRepository
 import com.vctapps.bustracker.data.setting.SettingsRepository
 import com.vctapps.bustracker.domain.entity.BusLocation
 import com.vctapps.bustracker.domain.entity.Settings
 import io.reactivex.Completable
+import io.reactivex.CompletableEmitter
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.io.IOException
 
-class SendLocationUseCaseImpl(val context: Context,
-                              val locationRepository: LocationRepository,
-                              val settingsRepository: SettingsRepository): SendLocationUseCase {
+class SettingsTrackingImpl(val context: Context,
+                           val settingGps: SettingGpsDevice,
+                           val locationRepository: LocationRepository,
+                           val settingsRepository: SettingsRepository): SettingsTracking {
 
     lateinit var locationManager: LocationManager
 
-    lateinit var gpsDriver: NmeaGpsDriver
+    lateinit var settings: Settings
 
     lateinit var locationListener: LocationListener
 
-    lateinit var settings: Settings
-
-    val TAG = "sendLocationUseCase"
+    val TAG = "settingsUseCase"
 
     override fun run(): Completable {
-        return Completable.create {
-            configGpsDriver()
-            configLocationManager()
-            settings = settingsRepository.getDeviceSettings().blockingGet()
-            Log.d(TAG, "sendLocationServiceCompleted")
-        }
-    }
+        return Completable.concatArray (
+            settingGps.run(),
+            Completable.create { emmiter ->
 
-    override fun stop(): Completable {
-        return Completable.create {
-            gpsDriver.unregister()
-            locationManager.removeUpdates(locationListener)
+                settings = settingsRepository.getDeviceSettings().blockingGet()
 
-            try {
-                gpsDriver.close()
-            } catch (e: IOException) {
-                Log.w(TAG, "Unable to close GPS driver")
+                settingLocationManager()
+
+                emmiter.onComplete()
             }
-        }
+        )
     }
 
-    private fun configLocationManager() {
+//    private fun settingDevice(emitter: CompletableEmitter) {
+//        settings = settingsRepository.getDeviceSettings()
+//                .doOnError { error -> emitter.onError(error) }
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .blockingGet()
+//    }
+
+    private fun settingLocationManager() {
         locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         locationListener = LocationListenerImpl()
 
@@ -61,15 +58,6 @@ class SendLocationUseCaseImpl(val context: Context,
                 5000,
                 0f,
                 locationListener)
-    }
-
-    private fun configGpsDriver() {
-        gpsDriver = NmeaGpsDriver(context,
-                BoardDefaults.uartName,
-                GpsDefaults.UART_BAUD,
-                GpsDefaults.ACCURACY)
-
-        gpsDriver.register()
     }
 
     inner class LocationListenerImpl : LocationListener {
