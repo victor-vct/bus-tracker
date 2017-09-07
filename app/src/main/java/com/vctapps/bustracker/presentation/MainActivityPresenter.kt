@@ -6,4 +6,6 @@ interface MainActivityPresenter {
 
     fun dettachFromView()
 
+    fun onClickedTryAgainButton()
+
 }

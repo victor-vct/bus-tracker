@@ -1,5 +1,6 @@
 package com.vctapps.bustracker.presentation
 
+import android.util.Log
 import com.vctapps.bustracker.data.setting.SettingsRepository
 import com.vctapps.bustracker.domain.SettingsTracking
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,16 +19,28 @@ class MainActivityPresenterImpl(val settingsTracking: SettingsTracking,
 
         baseView.showLoading()
 
-        settingsRepository.getDeviceSettings()
-                .subscribe({
-//                    disposable.add(settingsTracking
-//                            .run()
-//                            .subscribeOn(Schedulers.io())
-//                            .observeOn(AndroidSchedulers.mainThread())
-//                            .subscribe(
-//                                    {baseView.hideLoading()},
-//                                    {_ -> baseView.showMessageError()}))
-                },{error -> baseView.showMessageError()})
+        setUp()
+    }
+
+    override fun onClickedTryAgainButton() {
+        baseView.showLoading()
+
+        setUp()
+    }
+
+    private fun setUp(){
+        disposable.add(settingsRepository
+                .getDeviceSettings()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSuccess {
+                    settingsTracking.run().blockingGet()
+                }
+                .subscribe(
+                        {baseView.hideLoading()
+                            Log.d("Teste", "configurações realizadas com sucesso")},
+                        {error -> baseView.showMessageError()
+                            Log.d("Teste", "configurações não realizadas com sucesso. " + error)}))
     }
 
     override fun dettachFromView() {
