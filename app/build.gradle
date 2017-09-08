@@ -13,6 +13,8 @@ ext{
     RETROFIT_VERSION = '2.2.0'
     OKHTTP_LOGGING_INTERCEPTOR_VERSION = '3.6.0'
 
+    FIREBASE_VERSION = '10.2.6'
+
     ANDROID_SUPPORT_APPCOMPAT_VERSION = '25.3.1'
     ANDROID_CONTRIB_VERSION = '0.3'
     ANDROID_THINGS_VERSION = '0.4-devpreview'
@@ -65,6 +67,9 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION}"
     compile "com.squareup.retrofit2:converter-gson:${RETROFIT_VERSION}"
 
+    //FIREBASE
+    compile "com.google.firebase:firebase-database:${FIREBASE_VERSION}"
+
     // Tests
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -76,3 +81,5 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
+apply plugin: 'com.google.gms.google-services'
