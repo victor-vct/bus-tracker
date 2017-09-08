@@ -2,6 +2,7 @@ package com.vctapps.bustracker.di
 
 import android.content.Context
 import com.vctapps.bustracker.data.location.LocationRepository
+import com.vctapps.bustracker.data.notification.NeedsStopRepository
 import com.vctapps.bustracker.data.setting.SettingsRepository
 import com.vctapps.bustracker.data.setting.remote.RemoteSettingsDatasource
 import com.vctapps.bustracker.domain.SettingGpsDevice
@@ -30,8 +31,9 @@ class TrackerModule {
     @Provides
     @Singleton
     fun providesMainActivityPresenter(settingsTracking: SettingsTracking,
-                                      settingsRepository: SettingsRepository): MainActivityPresenter {
-        return MainActivityPresenterImpl(settingsTracking, settingsRepository)
+                                      settingsRepository: SettingsRepository,
+                                      needsStopRepository: NeedsStopRepository): MainActivityPresenter {
+        return MainActivityPresenterImpl(settingsTracking, settingsRepository, needsStopRepository)
     }
 
     @Provides

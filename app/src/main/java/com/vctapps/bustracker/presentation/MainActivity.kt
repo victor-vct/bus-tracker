@@ -31,6 +31,7 @@ class MainActivity : Activity(), BaseView {
     lateinit var waiting_view: ViewGroup
     lateinit var needs_stop: ViewGroup
     lateinit var tryAgainButton: Button
+    lateinit var arriveAtStopBusButton: Button
 
     @Inject
     lateinit var presenter: MainActivityPresenter
@@ -51,6 +52,7 @@ class MainActivity : Activity(), BaseView {
         waiting_view = waiting_message
         needs_stop = needs_stop_message
         tryAgainButton = tryAgain
+        arriveAtStopBusButton = arriveAtStopBus
 
         error_view.visibility = View.GONE
         loading_view.visibility = View.GONE
@@ -59,6 +61,10 @@ class MainActivity : Activity(), BaseView {
 
         tryAgainButton.setOnClickListener({
             presenter.onClickedTryAgainButton()
+        })
+
+        arriveAtStopBusButton.setOnClickListener({
+            hideLoading()
         })
     }
 
