@@ -7,6 +7,8 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.vctapps.bustracker.core.data.ApiService
 import com.vctapps.bustracker.data.location.LocationRepository
 import com.vctapps.bustracker.data.location.LocationRepositoryImpl
+import com.vctapps.bustracker.data.notification.NeedsStopRepository
+import com.vctapps.bustracker.data.notification.NeedsStopRepositoryImpl
 import com.vctapps.bustracker.data.setting.SettingsRepository
 import com.vctapps.bustracker.data.setting.SettingsRepositoryImpl
 import com.vctapps.bustracker.data.setting.local.LocalSettingsDatasource
@@ -85,6 +87,12 @@ class RepositoryModule(val application: Application) {
         okhttp.addInterceptor(loggingInterceptor)
 
         return okhttp.build()
+    }
+
+    @Provides
+    @Singleton
+    fun providesNeedsStopRepository(): NeedsStopRepository{
+        return NeedsStopRepositoryImpl()
     }
 
 }

@@ -1,14 +1,17 @@
 package com.vctapps.bustracker.presentation
 
 import android.util.Log
+import com.vctapps.bustracker.data.notification.NeedsStopRepository
 import com.vctapps.bustracker.data.setting.SettingsRepository
 import com.vctapps.bustracker.domain.SettingsTracking
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
+
 class MainActivityPresenterImpl(val settingsTracking: SettingsTracking,
-                                val settingsRepository: SettingsRepository): MainActivityPresenter {
+                                val settingsRepository: SettingsRepository,
+                                val needsStopRepository: NeedsStopRepository): MainActivityPresenter {
 
     lateinit var baseView: BaseView
 
@@ -41,6 +44,13 @@ class MainActivityPresenterImpl(val settingsTracking: SettingsTracking,
                             Log.d("Teste", "configurações realizadas com sucesso")},
                         {error -> baseView.showMessageError()
                             Log.d("Teste", "configurações não realizadas com sucesso. " + error)}))
+
+        disposable.add(needsStopRepository
+                .register()
+                .subscribe({
+                    baseView.showAlertToStop()
+                }))
+
     }
 
     override fun dettachFromView() {
