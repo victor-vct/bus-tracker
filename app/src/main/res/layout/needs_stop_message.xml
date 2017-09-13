@@ -7,6 +7,7 @@
     android:id="@+id/needs_stop_message">
 
     <ImageView
+        android:id="@+id/icNeedsStop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_needs_stop"/>
@@ -16,12 +17,14 @@
         android:layout_height="wrap_content"
         android:text="@string/needs_stop"
         style="@style/TextAppearance.AppCompat.Display1"
-        android:gravity="center"/>
+        android:layout_marginTop="@dimen/medium_margin"/>
 
     <Button
         android:id="@+id/arriveAtStopBus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cheguei no ponto"/>
+        android:text="@string/arrived_at_bus_stop"
+        android:layout_marginTop="@dimen/medium_margin"
+        style="@style/PrimaryButton"/>
 
 </LinearLayout>

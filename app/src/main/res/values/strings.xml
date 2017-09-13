@@ -9,4 +9,6 @@
 
     <string name="needs_stop">Pare no próximo ponto</string>
 
+    <string name="arrived_at_bus_stop">Avisar que chegou</string>
+
 </resources>

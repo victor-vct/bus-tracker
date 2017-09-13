@@ -1,12 +1,18 @@
 package com.vctapps.bustracker.presentation
 
 import android.Manifest
+import android.animation.Animator
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationSet
+import android.view.animation.ScaleAnimation
 import android.widget.Button
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -117,5 +123,42 @@ class MainActivity : Activity(), BaseView {
         loading_view.visibility = View.GONE
         waiting_view.visibility = View.GONE
         needs_stop.visibility = View.VISIBLE
+
+        var scaleXToMin = ObjectAnimator.ofFloat(icNeedsStop, "scaleX", 0f)
+        var scaleYToMin = ObjectAnimator.ofFloat(icNeedsStop, "scaleY", 0f)
+
+        var scaleXToMax = ObjectAnimator.ofFloat(icNeedsStop, "scaleX", 1f)
+        var scaleYToMax = ObjectAnimator.ofFloat(icNeedsStop, "scaleY", 1f)
+
+        var animatorSetToMin = AnimatorSet()
+        animatorSetToMin.playTogether(scaleXToMin,scaleYToMin)
+
+        var animatorSetToMax = AnimatorSet()
+        animatorSetToMax.playTogether(scaleXToMax,scaleYToMax)
+
+        var animator = AnimatorSet()
+        animator.duration = 300
+        animator.playSequentially(animatorSetToMin, animatorSetToMax)
+
+        animator.removeAllListeners()
+        animator.addListener(object : Animator.AnimatorListener{
+            override fun onAnimationRepeat(p0: Animator?) {
+                //Do nothing
+            }
+
+            override fun onAnimationEnd(p0: Animator?) {
+                animator.start()
+            }
+
+            override fun onAnimationCancel(p0: Animator?) {
+                //Do nothing
+            }
+
+            override fun onAnimationStart(p0: Animator?) {
+                //Do nothing
+            }
+        })
+
+        animator.start()
     }
 }
