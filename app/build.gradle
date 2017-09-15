@@ -37,7 +37,18 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        applicationVariants.all { variant ->
+            variant.buildConfigField "String", "BASE_URL", "\"" + getBaseUrl() + "\""
+        }
+
     }
+}
+
+def getBaseUrl(){
+    def Properties props = new Properties()
+    props.load(new FileInputStream(new File('secrets.properties')))
+    return props['BASE_URL']
 }
 
 dependencies {

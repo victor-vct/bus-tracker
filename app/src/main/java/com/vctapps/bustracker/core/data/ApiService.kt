@@ -1,5 +1,6 @@
 package com.vctapps.bustracker.core.data
 
+import com.vctapps.bustracker.BuildConfig
 import com.vctapps.bustracker.domain.entity.BusLocation
 import com.vctapps.bustracker.domain.entity.Settings
 import io.reactivex.Completable
@@ -11,8 +12,12 @@ import retrofit2.http.Path
 
 interface ApiService {
 
+    companion object {
+        val BASE_URL = BuildConfig.BASE_URL
+    }
+
     @GET("busmodule/{id_module}/setting/")
-    fun getSettings(@Path("id_module") idMdule: Int): Maybe<Settings>
+    fun getSettings(@Path("id_module") idModule: Int): Maybe<Settings>
 
     @POST("bus/{id_bus}/position/")
     fun sendLocation(@Path("id_bus") idBus: Int, @Body busLocation: BusLocation) : Completable

@@ -27,8 +27,6 @@ import javax.inject.Singleton
 @Singleton
 class RepositoryModule(val application: Application) {
 
-    val BASE_URL = "http://192.168.25.21:3000"
-
     @Provides
     @Singleton
     fun providesLocationRepository(apiService: ApiService): LocationRepository{
@@ -64,7 +62,7 @@ class RepositoryModule(val application: Application) {
     @Singleton
     fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit{
         return Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(ApiService.BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(Gson()))
                 .client(okHttpClient)
