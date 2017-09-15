@@ -5,6 +5,6 @@ import io.reactivex.Completable
 
 interface LocationRepository{
 
-    fun sendLocation(idBus: Int, busLocation: BusLocation): Completable
+    fun sendLocation(idBus: String, busLocation: BusLocation): Completable
 
 }

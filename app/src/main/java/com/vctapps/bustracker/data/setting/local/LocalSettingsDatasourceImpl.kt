@@ -23,7 +23,7 @@ class LocalSettingsDatasourceImpl(context: Context) : LocalSettingsDatasource {
     }
 
     override fun isDeviceSettings(): Boolean {
-        return sharedPreferences.getInt(ID_BUS, InvalidData.INT) != InvalidData.INT
+        return sharedPreferences.getString(ID_BUS, InvalidData.STRING) != InvalidData.STRING
     }
 
     override fun getDeviceSettings(): Maybe<Settings> {
@@ -48,16 +48,16 @@ class LocalSettingsDatasourceImpl(context: Context) : LocalSettingsDatasource {
         save(ID_BUS, settings.idBus)
     }
 
-    private fun save(key: String, value: Int){
+    private fun save(key: String, value: String){
         var editor = sharedPreferences.edit()
 
-        editor.putInt(key, value)
+        editor.putString(key, value)
 
         editor.commit()
     }
 
-    private fun get(key: String): Int{
-        return sharedPreferences.getInt(key, InvalidData.INT)
+    private fun get(key: String): String{
+        return sharedPreferences.getString(key, InvalidData.STRING)
     }
 
 }

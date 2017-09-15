@@ -16,10 +16,10 @@ interface ApiService {
         val BASE_URL = BuildConfig.BASE_URL
     }
 
-    @GET("busmodule/{id_module}/setting/")
-    fun getSettings(@Path("id_module") idModule: Int): Maybe<Settings>
+    @GET("busmodule/{id_module}/settings/")
+    fun getSettings(@Path("id_module") idModule: String): Maybe<Settings>
 
-    @POST("bus/{id_bus}/position/")
-    fun sendLocation(@Path("id_bus") idBus: Int, @Body busLocation: BusLocation) : Completable
+    @POST("busmodule/{id_module}/position/")
+    fun sendLocation(@Path("id_module") idModule: String, @Body busLocation: BusLocation) : Completable
 
 }

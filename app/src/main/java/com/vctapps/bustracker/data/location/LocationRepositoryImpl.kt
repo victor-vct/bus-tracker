@@ -6,8 +6,8 @@ import io.reactivex.Completable
 
 class LocationRepositoryImpl(val apiService: ApiService): LocationRepository {
 
-    override fun sendLocation(idBus: Int, busLocation: BusLocation): Completable {
-        return apiService.sendLocation(idBus, busLocation)
+    override fun sendLocation(idBusModule: String, busLocation: BusLocation): Completable {
+        return apiService.sendLocation(idBusModule, busLocation)
     }
 
 }

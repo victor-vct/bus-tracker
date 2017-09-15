@@ -67,7 +67,7 @@ class SettingsTrackingImpl(val context: Context,
 
         override fun onLocationChanged(p0: Location?) {
             Log.d(TAG, "BusLocation update: " + p0)
-            locationRepository.sendLocation(settings.idBus, getLocationObject(p0))
+            locationRepository.sendLocation(settings.idModule, getLocationObject(p0))
                     .subscribeOn(Schedulers.io())
                     .doOnError { Log.w(TAG, "error on sending location") }
                     .subscribe()
@@ -94,8 +94,8 @@ class SettingsTrackingImpl(val context: Context,
                 )
             }else{
                 this.busLocation!!.speed = locationUnformatted!!.speed
-                this.busLocation!!.lat = locationUnformatted.latitude
-                this.busLocation!!.lng = locationUnformatted.longitude
+                this.busLocation!!.latitude = locationUnformatted.latitude
+                this.busLocation!!.longitude = locationUnformatted.longitude
             }
 
             return this.busLocation!!
