@@ -13,4 +13,6 @@
 
     <include layout="@layout/needs_stop_message"/>
 
+    <include layout="@layout/waiting_to_start_route_message"/>
+
 </FrameLayout>

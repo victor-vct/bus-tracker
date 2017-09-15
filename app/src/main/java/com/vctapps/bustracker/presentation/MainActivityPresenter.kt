@@ -8,4 +8,6 @@ interface MainActivityPresenter {
 
     fun onClickedTryAgainButton()
 
+    fun onClickedStartRouteButton()
+
 }

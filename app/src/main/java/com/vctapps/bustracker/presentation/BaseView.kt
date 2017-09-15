@@ -10,4 +10,8 @@ interface BaseView{
 
     fun showAlertToStop()
 
+    fun showWaitToStartRoute()
+
+    fun showStartRoute()
+
 }

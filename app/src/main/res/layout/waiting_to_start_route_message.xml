@@ -4,25 +4,27 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:background="@color/backgroundScreen"
-    android:id="@+id/waiting_message">
+    android:id="@+id/waiting_to_start_route_message">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_wifi_tethering"/>
+        android:id="@+id/icBus"
+        android:layout_width="164dp"
+        android:layout_height="124dp"
+        android:scaleX="-1"
+        android:src="@drawable/ic_bus"/>
 
     <TextView
+        android:id="@+id/messageInformStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/waiting_message"
-        style="@style/TextAppearance.AppCompat.Display1"
-        android:gravity="center"/>
+        android:text="@string/inform_start_route_message"
+        style="@style/TextAppearance.AppCompat.Display1"/>
 
     <Button
-        android:id="@+id/finishRoute"
+        android:id="@+id/startRoute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/inform_finish_route"
+        android:text="@string/inform_start_route"
         android:layout_marginTop="@dimen/medium_margin"
         style="@style/PrimaryButton"/>
 

@@ -11,4 +11,10 @@
 
     <string name="arrived_at_bus_stop">Avisar que chegou</string>
 
+    <string name="inform_start_route_message">Nos informe quando começar sua rota.</string>
+
+    <string name="inform_start_route">Avisar que comecei</string>
+
+    <string name="inform_finish_route">Avisar que terminei</string>
+
 </resources>

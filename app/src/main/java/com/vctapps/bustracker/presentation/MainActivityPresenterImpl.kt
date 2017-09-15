@@ -8,7 +8,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-
 class MainActivityPresenterImpl(val settingsTracking: SettingsTracking,
                                 val settingsRepository: SettingsRepository,
                                 val needsStopRepository: NeedsStopRepository): MainActivityPresenter {
@@ -31,16 +30,20 @@ class MainActivityPresenterImpl(val settingsTracking: SettingsTracking,
         setUp()
     }
 
+    override fun onClickedStartRouteButton() {
+        baseView.showStartRoute()
+
+        settingsTracking.run()
+                .subscribe()
+    }
+
     private fun setUp(){
         disposable.add(settingsRepository
                 .getDeviceSettings()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess {
-                    settingsTracking.run().blockingGet()
-                }
                 .subscribe(
-                        {baseView.hideLoading()
+                        {baseView.showWaitToStartRoute()
                             Log.d("Teste", "configurações realizadas com sucesso")},
                         {error -> baseView.showMessageError()
                             Log.d("Teste", "configurações não realizadas com sucesso. " + error)}))
