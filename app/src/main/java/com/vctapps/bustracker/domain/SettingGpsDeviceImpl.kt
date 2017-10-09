@@ -6,15 +6,16 @@ import com.vctapps.bustracker.core.BoardDefaults
 import com.vctapps.bustracker.core.GpsDefaults
 import io.reactivex.Completable
 
-
 class SettingGpsDeviceImpl(val context: Context): SettingGpsDevice {
 
     lateinit var gpsDriver: NmeaGpsDriver
 
     override fun run(): Completable {
-        return Completable.create { emmiter ->
+        return Completable.create { emitter ->
+
             settingGpsDriver()
-            emmiter.onComplete()
+
+            emitter.onComplete()
         }
     }
 

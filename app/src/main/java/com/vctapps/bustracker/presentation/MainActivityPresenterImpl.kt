@@ -44,9 +44,9 @@ class MainActivityPresenterImpl(val settingsTracking: SettingsTracking,
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {baseView.showWaitToStartRoute()
-                            Log.d("Teste", "configurações realizadas com sucesso")},
+                            Log.d("BusTracker", "configurações realizadas com sucesso")},
                         {error -> baseView.showMessageError()
-                            Log.d("Teste", "configurações não realizadas com sucesso. " + error)}))
+                            Log.d("BusTracker", "configurações não realizadas com sucesso. " + error)}))
 
         disposable.add(needsStopRepository
                 .register()

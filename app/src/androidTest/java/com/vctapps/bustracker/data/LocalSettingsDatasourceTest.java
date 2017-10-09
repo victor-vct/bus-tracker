@@ -20,8 +20,8 @@ public class LocalSettingsDatasourceTest {
 
     private LocalSettingsDatasource localSettingsDatasource;
 
-    private int ID_MODULE = BoardDefaults.INSTANCE.getID_MODULE_VALUE();
-    private int ID_BUS = 456;
+    private String ID_MODULE = BoardDefaults.INSTANCE.getID_MODULE_VALUE();
+    private String ID_BUS = "456";
 
     @Before
     public void setUp(){

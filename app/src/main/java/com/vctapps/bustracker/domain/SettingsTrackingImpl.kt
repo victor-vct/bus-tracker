@@ -30,25 +30,19 @@ class SettingsTrackingImpl(val context: Context,
 
     override fun run(): Completable {
         return Completable.concatArray (
-            settingGps.run(),
-            Completable.create { emmiter ->
+                settingGps.run(),
+                Completable.create { emitter ->
 
-                settings = settingsRepository.getDeviceSettings().blockingGet()
+                    settings = settingsRepository.getDeviceSettings()
+                            .subscribeOn(Schedulers.io())
+                            .blockingGet()
 
-                settingLocationManager()
+                    settingLocationManager()
 
-                emmiter.onComplete()
-            }
+                    emitter.onComplete()
+                }
         )
     }
-
-//    private fun settingDevice(emitter: CompletableEmitter) {
-//        settings = settingsRepository.getDeviceSettings()
-//                .doOnError { error -> emitter.onError(error) }
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .blockingGet()
-//    }
 
     private fun settingLocationManager() {
         locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -58,7 +52,7 @@ class SettingsTrackingImpl(val context: Context,
                 5000,
                 0f,
                 locationListener)
-    }
+       }
 
     inner class LocationListenerImpl : LocationListener {
 

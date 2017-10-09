@@ -4,7 +4,7 @@ import android.os.Build
 
 object BoardDefaults {
 
-    val ID_MODULE_VALUE = "59bbef177cc87e0012a744e7"
+    val ID_MODULE_VALUE = "59ba9ad0fce563164dd6f82a"
 
     private val DEVICE_EDISON = "edison"
     private val DEVICE_RPI3 = "rpi3"
