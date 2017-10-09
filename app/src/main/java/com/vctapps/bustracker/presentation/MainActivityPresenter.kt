@@ -10,4 +10,8 @@ interface MainActivityPresenter {
 
     fun onClickedStartRouteButton()
 
+    fun onClickedFinishRouteButton()
+
+    fun onClickedSendArrived()
+
 }

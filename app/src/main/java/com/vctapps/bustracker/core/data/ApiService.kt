@@ -22,4 +22,7 @@ interface ApiService {
     @POST("busmodule/{id_module}/position/")
     fun sendLocation(@Path("id_module") idModule: String, @Body busLocation: BusLocation) : Completable
 
+    @GET("busmodule/{id_module}/arrive/")
+    fun sendArrived(@Path("id_module") idModule: String) : Completable
+
 }

@@ -8,13 +8,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class MainActivityPresenterImpl(val settingsTracking: SettingsTracking,
-                                val settingsRepository: SettingsRepository,
-                                val needsStopRepository: NeedsStopRepository): MainActivityPresenter {
+class MainActivityPresenterImpl(private val settingsTracking: SettingsTracking,
+                                private val settingsRepository: SettingsRepository,
+                                private val needsStopRepository: NeedsStopRepository): MainActivityPresenter {
 
     lateinit var baseView: BaseView
 
-    val disposable: CompositeDisposable = CompositeDisposable()
+    private val disposable: CompositeDisposable = CompositeDisposable()
 
     override fun attachTo(baseView: BaseView) {
         this.baseView = baseView
@@ -33,8 +33,25 @@ class MainActivityPresenterImpl(val settingsTracking: SettingsTracking,
     override fun onClickedStartRouteButton() {
         baseView.showStartRoute()
 
-        settingsTracking.run()
-                .subscribe()
+        disposable.add(settingsTracking.run()
+                .subscribe())
+    }
+
+    override fun onClickedFinishRouteButton() {
+        disposable.clear()
+
+        baseView.showWaitToStartRoute()
+    }
+
+    override fun onClickedSendArrived() {
+        disposable.add(
+                needsStopRepository.sendAlertThatArrived()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({
+                            baseView.hideLoading()
+                        })
+        )
     }
 
     private fun setUp(){

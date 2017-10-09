@@ -89,8 +89,8 @@ class RepositoryModule(val application: Application) {
 
     @Provides
     @Singleton
-    fun providesNeedsStopRepository(): NeedsStopRepository{
-        return NeedsStopRepositoryImpl()
+    fun providesNeedsStopRepository(apiService: ApiService): NeedsStopRepository{
+        return NeedsStopRepositoryImpl(apiService)
     }
 
 }

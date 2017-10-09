@@ -4,9 +4,11 @@ import android.util.Log
 import com.google.firebase.database.*
 import com.vctapps.bustracker.core.BoardDefaults
 import com.vctapps.bustracker.core.InvalidData
+import com.vctapps.bustracker.core.data.ApiService
+import io.reactivex.Completable
 import io.reactivex.Observable
 
-class NeedsStopRepositoryImpl: NeedsStopRepository {
+class NeedsStopRepositoryImpl(private val apiService: ApiService): NeedsStopRepository {
 
     private val NEEDS_TO_STOP = "needs_to_stop"
 
@@ -45,4 +47,7 @@ class NeedsStopRepositoryImpl: NeedsStopRepository {
 
         return nodeNeedsToStop
     }
+
+    override fun sendAlertThatArrived() = apiService.sendArrived(BoardDefaults.ID_MODULE_VALUE)
+
 }

@@ -76,7 +76,7 @@ class MainActivity : Activity(), BaseView {
         })
 
         arriveAtStopBusButton.setOnClickListener({
-            hideLoading()
+            presenter.onClickedSendArrived()
         })
 
         startRouteButton.setOnClickListener({
